@@ -11,7 +11,13 @@ const customStyles = {
   container: provided => ({
     ...provided,
     width: "100%"
-  })
+  }),
+  placeholder: (defaultStyles) => {
+    return {
+        ...defaultStyles,
+        fontSize: "14px"
+    }
+}
 }
 
 export const Dropdown = ({
