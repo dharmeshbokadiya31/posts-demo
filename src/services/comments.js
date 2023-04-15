@@ -26,9 +26,9 @@ let errorMessage = (e) => {
   .show();
 }
 
-export const fetchPostData = (filter) =>
+export const fetchPostCommentData = (id) =>
   new Promise((resolve, reject) => {
-    fetch(`${API_BASE_URL}/posts?limit=${filter.limit}&skip=${filter.page}`)
+    fetch(`${API_BASE_URL}/comments/post/${id}`)
       .then((res) => res.json())
       .then((json) => resolve(json))
       .catch((e) => {
@@ -36,34 +36,23 @@ export const fetchPostData = (filter) =>
       });
   });
 
-export const fetchUserPostData = (filter) =>
+export const deleteComment = (id) =>
   new Promise((resolve, reject) => {
-    fetch(`${API_BASE_URL}/posts/user/${filter.id}?limit=${filter.limit}&skip=${filter.page}`)
-      .then((res) => res.json())
-      .then((json) => resolve(json))
-      .catch((e) => {
-        reject(e);
-      });
-  });
-
-export const deletePost = (id, setLoading) =>
-  new Promise((resolve, reject) => {
-    fetch(`${API_BASE_URL}/posts/${id}`, {
+    fetch(`${API_BASE_URL}/comments/${id}`, {
       method: "DELETE",
     })
       .then((res) => {
-        successMessage("Post Deleted Successfully")
+        successMessage("Comment Deleted Successfully")
         res.json();
       })
       .then((json) => resolve(json))
       .catch((e) => {
           errorMessage(e)
-          setLoading(false)
-        reject(e);
+          reject(e);
       });
   });
 
-export const updatePost = (id, data, closeModal, setLoading) => {
+export const updateCommentDetail = (id, data, setLoading) => {
   new Promise((resolve, reject) => {
     fetch(`${API_BASE_URL}/posts/${id}`, {
       method: "PUT",
@@ -72,8 +61,8 @@ export const updatePost = (id, data, closeModal, setLoading) => {
     })
       .then((res) => {
         res.json();
-        successMessage("Post Updated Successfully")
-        closeModal()
+        setLoading(false)
+        successMessage("Comment Updated Successfully")
       })
       .then((json) => resolve(json))
       .catch((e) => {
@@ -85,7 +74,7 @@ export const updatePost = (id, data, closeModal, setLoading) => {
   });
 };
 
-export const addPost = (data, closeModal, setLoading) =>
+export const addComments = (data, setLoading) =>
   new Promise((resolve, reject) => {
     fetch(`${API_BASE_URL}/posts/add`, {
       method: "POST",
@@ -94,23 +83,13 @@ export const addPost = (data, closeModal, setLoading) =>
     })
       .then((res) => {
         res.json();
-        successMessage("Post Added Successfully")
-        closeModal()
+        successMessage("Comment Added Successfully")
+        setLoading(false)
       })
       .then((json) => resolve(json))
       .catch((e) => {
         errorMessage(e)
         setLoading(false)
-        reject(e);
-      });
-  });
-
-  export const fetchUsersData = (filter) =>
-  new Promise((resolve, reject) => {
-    fetch(`${API_BASE_URL}/users?limit=${filter.limit}&skip=${filter.page}`)
-      .then((res) => res.json())
-      .then((json) => resolve(json))
-      .catch((e) => {
         reject(e);
       });
   });

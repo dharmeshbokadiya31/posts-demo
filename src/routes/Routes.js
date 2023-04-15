@@ -3,5 +3,6 @@ export const routes = {
     home: '/home',
     login: '/login',
     register: "/register",
-    chat: "/chat"
+    chat: "/chat",
+    userPosts: "user-posts"
 }

@@ -5,6 +5,7 @@ import { TableButton } from "../Common/Buttons";
 import DeleteModal from "../ConfirmationModal/DeleteModal";
 import EditPostModal from "../../components/home/EditPostModal";
 import Loader from "../Common/Loader";
+import { LIMIT } from "../../constants/constant";
 const HeaderFields = [
   "Id",
   "Title",
@@ -81,7 +82,7 @@ export default function Table(props) {
                             return (
                               <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
                                 {i === "id" ? 
-                                  ((props.page - 1) * 10 + index + 1) 
+                                  ((props.page - 1) * LIMIT + index + 1) 
                                   : i === "tags" ? 
                                   <>
                                     {ele[i].map(tag => 

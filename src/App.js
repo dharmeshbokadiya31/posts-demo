@@ -7,6 +7,7 @@ import { routes } from "./routes/Routes";
 import Posts from "./pages/posts";
 import Register from "./pages/register";
 import Chat from "./pages/chat";
+import UserPosts from "./pages/userPosts";
 
 function App() {
   return (
@@ -33,6 +34,14 @@ function App() {
           element={
             <PublicRoute>
               <Register />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path={`${routes.userPosts}/:userId`}
+          element={
+            <PublicRoute>
+              <UserPosts />
             </PublicRoute>
           }
         />

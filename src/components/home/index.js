@@ -7,6 +7,7 @@ import Table from "../../components/Table";
 import EditPostModal from "./EditPostModal";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes/Routes";
+import { LIMIT } from "../../constants/constant";
 
 const Index = ({ data, setFilter, filter, total, loader }) => {
   const [showModal, setShowModal] = useState(false);
@@ -18,7 +19,7 @@ const Index = ({ data, setFilter, filter, total, loader }) => {
 
   useEffect(() => {
     if (filter.page === 0) {
-      setPage(10 / filter.limit);
+      setPage(LIMIT / filter.limit);
     } else {
       setPage((filter.page / filter.limit) + 1);
     }
@@ -27,7 +28,7 @@ const Index = ({ data, setFilter, filter, total, loader }) => {
   useEffect(() => {
     setDisableNext(false);
     setDisablePrev(false);
-    if (page === Math.round(total / 10)) {
+    if (page === Math.round(total / LIMIT)) {
       setDisableNext(true);
     }
     if (page === 1) {
@@ -40,20 +41,20 @@ const Index = ({ data, setFilter, filter, total, loader }) => {
     if (filter.page) {
       setFilter({
         ...filter,
-        page: filter.page + 10
+        page: filter.page + LIMIT
       })
     }
   };
   const onPreviousClick = () => {
     setFilter({
       ...filter,
-      page: filter.page - 10
+      page: filter.page - LIMIT
     });
   };
   const changePage = (i) => {
     setFilter({
       ...filter,
-      page: i * 10
+      page: i * LIMIT
     });
   };
   

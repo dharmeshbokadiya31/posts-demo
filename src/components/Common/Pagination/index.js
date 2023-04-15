@@ -1,12 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { LIMIT } from "../../../constants/constant";
 
 const Pagination = ({ onNextClick, disableNext, total, disablePrev, changePage, onPreviousClick }) => {
   const [count, setCount] = useState([]);
   useEffect(() => {
     let arr = [];
-    for (let i = 0; i < Math.round(total / 10); i++) {
+    for (let i = 0; i < Math.round(total / LIMIT); i++) {
       arr.push(i);
     }
     setCount(arr?.length ? arr : [0]);

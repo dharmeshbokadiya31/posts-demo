@@ -5,12 +5,38 @@ import Loader from '../components/Common/Loader';
 import LayoutWrapper from '../components/Common/LayoutWrapper';
 
 const Posts = () => {
-    const { data, total, setFilter, filter, loader } = usePostHook();
+    const {
+        data,
+        total,
+        filter,
+        loader,
+        users,
+        usersTotal,
+        userFilter,
+        loader2,
+        setFilter,
+        setUserFilter,
+        setData,
+        setUsers
+    } = usePostHook();
     return (
         <>
-            {loader && <Loader />}
+            {(loader || loader2) && <Loader />}
             <LayoutWrapper />
-            <Index data={data || []} total={total} setFilter={setFilter} filter={filter} />
+            <Index
+              data={data || []}
+              total={total}
+              filter={filter}
+              users={users}
+              usersTotal={usersTotal}
+              userFilter={userFilter}
+              loader={loader}
+              loader2={loader2}
+              setData={setData}
+              setFilter={setFilter}
+              setUserFilter={setUserFilter}
+              setUsers={setUsers}
+            />
         </>
     )
 }
