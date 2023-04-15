@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { deletePost } from "../../services/post";
-import { SecondaryButton, SubmitButton } from "../Common/Buttons";
+import { PrimaryButton, SecondaryButton, SubmitButton } from "../Common/Buttons";
 
 const DeleteModal = (props) => {
   const [loading, setLoading] = useState(false)
@@ -36,14 +36,14 @@ const DeleteModal = (props) => {
                 <h3 className="mb-5 text-lg font-normal text-black">
                   Are you sure you want to delete this post?
                 </h3>
-                <div className="flex items-center justify-center p-6 border-t border-solid border-blueGray-200 rounded-b">
+                <div className="flex items-center justify-center p-6 border-t border-solid border-blueGray-200 rounded-b gap-2">
                   <SecondaryButton
                     disabled={loading}
                     title="No,Cancel"
                     onClick={() => props.setShowDeleteModal(false)}
                     type="button"
                   />
-                  <SubmitButton
+                  <PrimaryButton
                     loading={loading}
                     disabled={loading}
                     className="flex items-center gap-2"

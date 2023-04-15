@@ -23,7 +23,6 @@ export const useLoginHook = () => {
             localStorage.setItem('userData', existedObj ? JSON.stringify(existedObj) : false);
             setIsLogin(true);
         } else {
-            console.log("eeeeeeee")
            setError('No user data');
            snackbar()
            .danger("", "Invalid credentials")
@@ -67,21 +66,35 @@ export const useLoginHook = () => {
 
     const handleSignUp = async (e) => {
         e.preventDefault()
+        let regData = localStorage.getItem('registrationData')
         if (registrationData && registrationData.userName && registrationData.password && registrationData.email && registrationData.phoneNumber) {
-            try {
-                await setLoading(true);
-                await setError('');
-                const existingArray = localStorage.getItem('registrationData') ? JSON.parse(localStorage.getItem('registrationData')) : [];
-                let nextId = existingArray.length > 0 ? existingArray[existingArray.length - 1].id + 1 : 1;
-                registrationData.id = nextId;
-                existingArray.push(registrationData)
-                localStorage.setItem('registrationData', JSON.stringify(existingArray))
-                setIsRegistered(true);
-            } catch (error) {
-                setError(error.message);
-                setIsRegistered(false);
-            } finally {
-                setLoading(false);
+            let parseRegData = JSON.parse(regData)
+            if (parseRegData && parseRegData.find(detail => detail.userName === registrationData.userName || detail.email === registrationData.email)) {
+                snackbar()
+                .danger("", "Username or Email already exists.")
+                .with({
+                  color: "bg-red-600",
+                  positionX: "end",
+                  positionY: "bottom",
+                  fontColor: "blue",
+                })
+                .show()
+            } else {
+                try {
+                    await setLoading(true);
+                    await setError('');
+                    const existingArray = regData ? JSON.parse(regData) : [];
+                    let nextId = existingArray.length > 0 ? existingArray[existingArray.length - 1].id + 1 : 1;
+                    registrationData.id = nextId;
+                    existingArray.push(registrationData)
+                    localStorage.setItem('registrationData', JSON.stringify(existingArray))
+                    setIsRegistered(true);
+                } catch (error) {
+                    setError(error.message);
+                    setIsRegistered(false);
+                } finally {
+                    setLoading(false);
+                }
             }
         } else {
             setError('Please insert all data');

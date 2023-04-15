@@ -105,6 +105,16 @@ export const addPost = (data, closeModal, setLoading) =>
       });
   });
 
+export const fetchSearchPostData = (query) =>
+  new Promise((resolve, reject) => {
+    fetch(`${API_BASE_URL}/posts/search?q=${query}`)
+      .then((res) => res.json())
+      .then((json) => resolve(json))
+      .catch((e) => {
+        reject(e);
+      });
+  });
+
   export const fetchUsersData = (filter) =>
   new Promise((resolve, reject) => {
     fetch(`${API_BASE_URL}/users?limit=${filter.limit}&skip=${filter.page}`)

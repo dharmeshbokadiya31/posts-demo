@@ -14,10 +14,13 @@ const Posts = () => {
         usersTotal,
         userFilter,
         loader2,
+        search,
         setFilter,
         setUserFilter,
         setData,
-        setUsers
+        setUsers,
+        setSearch,
+        getSearchData
     } = usePostHook();
     return (
         <>
@@ -32,10 +35,13 @@ const Posts = () => {
               userFilter={userFilter}
               loader={loader}
               loader2={loader2}
+              search={search}
               setData={setData}
               setFilter={setFilter}
               setUserFilter={setUserFilter}
               setUsers={setUsers}
+              setSearch={setSearch}
+              getSearchData={getSearchData}
             />
         </>
     )

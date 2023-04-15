@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { addPost } from "../../services/post";
-import { SecondaryButton, SubmitButton } from "../Common/Buttons";
+import { PrimaryButton, SecondaryButton, SubmitButton } from "../Common/Buttons";
 import { Input } from "../Input";
 import { Textarea } from "../Textarea";
 import { Dropdown } from "../Common/Select/Select";
@@ -124,7 +124,7 @@ const EditPostModal = (props) => {
                 <p className="text-xs text-red">{msg?.tags}</p>
               </form>
             </div>
-            <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+            <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b gap-2">
               <SecondaryButton
                 disabled={loading}
                 title="Close"
@@ -133,7 +133,7 @@ const EditPostModal = (props) => {
                   setShowModal(false);
                 }}
               />
-              <SubmitButton
+              <PrimaryButton
                 loading={loading}
                 disabled={loading}
                 title="Submit"

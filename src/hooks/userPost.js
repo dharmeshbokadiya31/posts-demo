@@ -50,6 +50,13 @@ export const useUserPostHook = () => {
     getData()
   }, [filter])
 
-  return { data, loader, filter, setFilter, total, setData };
+  return { 
+    data,
+    loader,
+    filter,
+    total,
+    setFilter,
+    setData,
+  };
 };
 

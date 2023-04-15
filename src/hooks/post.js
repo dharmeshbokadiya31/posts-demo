@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import { fetchPostData, fetchUsersData } from "../services/post";
+import { useState, useEffect, useCallback } from "react";
+import { fetchPostData, fetchSearchPostData, fetchUsersData } from "../services/post";
+import { useDebouncedCallback } from 'use-debounce';
 
 export const usePostHook = () => {
   const [data, setData] = useState([]);
@@ -10,6 +11,7 @@ export const usePostHook = () => {
   const [usersTotal, setUsersTotal] = useState(null);
   const [filter, setFilter] = useState({ limit: 4, page: 0 });
   const [userFilter, setUserFilter] = useState({ limit: 4, page: 0 });
+  const [search, setSearch] = useState("")
 
   const getData = async () => {
     try {
@@ -43,6 +45,30 @@ export const usePostHook = () => {
     }
   }
 
+  const getSearchData = useDebouncedCallback(async () => {
+    try {
+      // await setError('');
+      await setLoader(true)
+      await fetchSearchPostData(search).then((res) => {
+        let postData = res?.posts?.map(x => {
+          return {
+            ...x,
+            tags: x.tags.map(y => {
+              return { value: y, label: y}
+            })
+          }
+        })
+        setData(postData)
+        setTotal(res.total)
+      })
+    }
+    catch (error) {
+      // setError(error.message);
+    } finally {
+      setLoader(false)
+    }
+  }, 500)
+
   useEffect(() => {
     getData()
   }, [filter])
@@ -60,10 +86,13 @@ export const usePostHook = () => {
     usersTotal,
     userFilter,
     loader2,
+    search,
+    setSearch,
     setFilter,
     setUserFilter,
     setData,
-    setUsers
+    setUsers,
+    getSearchData
   };
 };
 
