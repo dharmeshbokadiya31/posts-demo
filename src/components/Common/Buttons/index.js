@@ -21,7 +21,7 @@ export const SecondaryButton = ({ title, type, onClick }) => {
     <button
       type={type}
       onClick={onClick}
-      className="rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-black-500 focus:ring-offset-2"
+      className="rounded-md border border-transparent border-indigo-500 hover:bg-indigo-500 bg-transparent text-indigo-500 hover:text-white transition py-2 px-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-black-500 focus:ring-offset-2"
     >
       {title}
     </button>
