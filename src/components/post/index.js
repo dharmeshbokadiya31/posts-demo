@@ -2,6 +2,7 @@ import React from 'react';
 import PostDetails from './postDetails';
 import UserDetails from './userDetails';
 import { Input } from '../Input';
+import { SHORT_LIMIT } from '../../constants/constant';
 
 const Index = ({
   data,
@@ -23,14 +24,14 @@ const Index = ({
   const showMoreBlogs = () => {
     setFilter({
       ...filter,
-      page: filter.page + 4
+      page: filter.page + SHORT_LIMIT
     });
   }
 
   const showMoreUsers = () => {
     setUserFilter({
       ...userFilter,
-      page: userFilter.page + 4
+      page: userFilter.page + SHORT_LIMIT
     });
   }
 

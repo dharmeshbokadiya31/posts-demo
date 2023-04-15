@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { fetchPostData, fetchSearchPostData, fetchUsersData } from "../services/post";
 import { useDebouncedCallback } from 'use-debounce';
+import { SHORT_LIMIT } from "../constants/constant";
 
 export const usePostHook = () => {
   const [data, setData] = useState([]);
@@ -9,8 +10,8 @@ export const usePostHook = () => {
   const [total, setTotal] = useState(50);
   const [users, setUsers] = useState(null);
   const [usersTotal, setUsersTotal] = useState(null);
-  const [filter, setFilter] = useState({ limit: 4, page: 0 });
-  const [userFilter, setUserFilter] = useState({ limit: 4, page: 0 });
+  const [filter, setFilter] = useState({ limit: SHORT_LIMIT, page: 0 });
+  const [userFilter, setUserFilter] = useState({ limit: SHORT_LIMIT, page: 0 });
   const [search, setSearch] = useState("")
 
   const getData = async () => {
